@@ -4,27 +4,25 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import dao.UsersDAO;
-import model.Users;
+import dao.UserDAO;
+import model.User;
 
+/**
+ * ログイン・ログアウト処理を行うクラス
+ * @author d.sugawara
+ *
+ */
 public class AuthLogic {
-	/**
-	 * ログイン処理を行う
-	 * @param email
-	 * @param password
-	 * @return 成功時はログインしたユーザ、失敗時はnull
-	 */
+    public User login(String email, String password) {
+        UserDAO dao = new UserDAO();
+        User user = dao.findByEmail(email);
+        System.out.println(user);
+        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
+            return user;
+        }
 
-	public Users login(String email, String password) {
-		UsersDAO dao = new UsersDAO();
-		Users user = dao.findByEmail(email);
-		
-		if ((user != null) && (BCrypt.checkpw(password, user.getPassword()))) {
-			return user;
-		}
-		
-		return null;
-	}
+        return null;
+    }
 	
 	/**
 	 * ログアウト処理を行う

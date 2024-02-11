@@ -1,0 +1,423 @@
+ul.sidenav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #eeeeee;
+  position: relative;
+  overflow: auto;
+}
+
+ul.sidenav li a {
+  display: block;
+  color: #000000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+ul.sidenav li a:hover {
+  background-color: #daa66e;
+  color: white;
+}
+
+div.content {
+  margin-left: 25%;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 900px) {
+  ul.sidenav {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  ul.sidenav li a {
+    float: left;
+    padding: 15px;
+  }
+
+  div.content {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  ul.sidenav li a {
+    text-align: center;
+    float: none;
+  }
+}
+
+/*================================================================================================
+これより上は全体画面のcssです
+==================================================================================================*/
+
+.user-admin {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e8e2cd;
+  display: flex;
+  /* Flex container to enable flex layout */
+}
+
+.container {
+  flex-grow: 1;
+  /* Allow container to grow and take remaining space */
+  max-width: 75%;
+  /* Adjust the maximum width of the container */
+  margin: 20px 20px 20px 70px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.user-h1 {
+  text-align: center;
+}
+
+.user {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  margin-bottom: 10px;
+}
+
+.user-info label {
+  font-weight: bold;
+}
+
+.user-info span {
+  display: inline-block;
+  width: 200px;
+  margin-right: 10px;
+}
+
+.side-img {
+  max-width: 50%;
+  height: auto;
+}
+
+
+
+
+/*================================================================================================
+これより上はユーザー管理画面のcssです
+==================================================================================================*/
+.login-admin {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+
+}
+
+.login-title {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.login-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group button {
+  background-color: #008051;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form-group button:hover {
+  background-color: #45a049;
+}
+
+/*================================================================================================
+これより上はログイン画面のcssです
+==================================================================================================*/
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+ul.sidenav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  /* 左側に配置 */
+  left: 0;
+  top: 0;
+}
+
+.container {
+  flex-grow: 1;
+  /* Allow container to grow and take remaining space */
+  max-width: 75%;
+  /* Adjust the maximum width of the container */
+  margin-left: 270px;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.product-title {
+  text-align: center;
+}
+
+.product-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-list {
+  margin-bottom: 10px;
+}
+
+.user-info span {
+  display: inline-block;
+  width: 200px;
+  margin-right: 10px;
+}
+
+#product-details {
+  width: 80%;
+  margin: 1% 5%;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+button {
+  background-color: #008051;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+/*================================================================================================
+これより上は商品一覧画面のcssです
+==================================================================================================*/
+.order-admin {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.order-main {
+  display: flex;
+  width: 100%;
+}
+
+
+
+.order-container {
+  width: 80%;
+  padding: 20px;
+}
+
+.order-container {
+  background-color: #e8e2cd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.order-title {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.order-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.order-button {
+  background-color: #008051;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 5%;
+}
+
+.order-button:hover {
+  background-color: #45a049;
+}
+
+.product-list {
+  margin-top: 30px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2%;
+}
+
+.order-item span {
+  font-size: 20px;
+  line-height: 3;
+}
+
+/*================================================================================================
+これより上は注文データ一覧画面のcssです
+==================================================================================================*/
+.order-info-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.order-info-title {
+  color: #333;
+}
+
+.order-imfo-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-info-details {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /* 水平方向に配置 */
+}
+
+.order-info2,
+.product-info2,
+.payment-info,
+.shipping-info {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.order-info2 p,
+.product-info2 p,
+.payment-info p,
+.shipping-info p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.order-info2 strong {
+  margin-right: 10px;
+}
+
+#shipping-status {
+  width: 150px;
+  padding: 5px;
+}
+
+.order-info-button {
+  background-color: #008051;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.order-info-button:hover {
+  background-color: #0056b3;
+}
+
+.info-title {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
