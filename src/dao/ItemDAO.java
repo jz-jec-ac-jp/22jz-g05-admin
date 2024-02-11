@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,106 +107,38 @@ public class ItemDAO {
 		return new Item(ItemID, ItemName, ItemPrice,ItemStock,ItemDESCRIPTION,Itemimage_url,PRODUCT_TYPE,new_item,FEATURED_PRODUCTS, cdate, udate);
 	}
 	
-	public void insertItem(String productName, String price,String stock,String FEATURED_PRODUCTS,String description, String image_url,String PRODUCT_TYPE,String new_item) {
-		int pr = Integer.parseInt(price);
-		int st = Integer.parseInt(stock);
-		int ptype = Integer.parseInt(PRODUCT_TYPE);
-		int ni = Integer.parseInt(new_item);
-		int fp = Integer.parseInt(FEATURED_PRODUCTS);
-	       DBManager manager = DBManager.getInstance();
-	    try (Connection cn = manager.getConnection()) {
-	        String sql = "INSERT INTO merchandise (image_url, product_name, description_of_item, price, product_type, stock, new_item, featured_products, added_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        PreparedStatement stmt = cn.prepareStatement(sql);
-	        stmt.setString(1, image_url);
-	        stmt.setString(2, productName);
-	        stmt.setString(3, description);
-	        stmt.setInt(4, pr);
-	        stmt.setInt(5, ptype);
-	        stmt.setInt(6, st);
-	        stmt.setInt(7, ni);
-	        stmt.setInt(8, fp);
-		stmt.setInt(9, new Timestamp(System.currentTimeMillis()));
-		stmt.setInt(10,new Timestamp(System.currentTimeMillis()));
-		stmt.executeUpdate();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
-
-//
-//	public void set(String productName, String productCode, String price,String stock,String FEATURED_PRODUCTS,
-//			String description, String size, String color, String image_url,String PRODUCT_TYPE,String new_item) {
-//		System.out.println("do");
-//		//int pc = Integer.parseInt(productCode);
-//		int pr = Integer.parseInt(price);
+	public boolean insertItem(String productName, int price,int stock,int FEATURED_PRODUCTS,String description, String image_url,int PRODUCT_TYPE,int new_item) {
+//		int pr = price;
 //		int st = Integer.parseInt(stock);
 //		int ptype = Integer.parseInt(PRODUCT_TYPE);
 //		int ni = Integer.parseInt(new_item);
 //		int fp = Integer.parseInt(FEATURED_PRODUCTS);
-//		
-//		DBManager manager = DBManager.getInstance();
-//		try(Connection cn = manager.getConnection()) {
-//			String sql = "INSERT INTO merchandise (PRODUCT_NAME,PRICE,STOCK,DESCRIPTION_OF_ITEM,image_url,PRODUCT_TYPE,new_item,FEATURED_PRODUCTS) VALUES(?,?,?,?,?,?,?,?)";
-//			PreparedStatement stmt = cn.prepareStatement(sql);
-//			
-//			stmt.setString(1,productName);
-////			stmt.setInt(2, pc);
-//			stmt.setInt(2, pr);
-//			stmt.setInt(3, st);
-//			stmt.setString(4, description);
-//			//stmt.setString(5, image_url);
-//			stmt.setString(5, image_url);
-//			stmt.setInt(6,ptype);
-//			stmt.setInt(7,ni);
-//			stmt.setInt(8, fp);
-//			System.out.println("succses");
-////			int Size = Integer.parseInt(size);
-////			int Color = Integer.parseInt(color);
-////			int Stock = Integer.parseInt(stock);
-////			setsize(Size);
-////			setcolor(Color);
-//			
-//			stmt.executeUpdate();
-//			
-//			// データをリストに格納
-//		} catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
+		int ret = -1;
+	       DBManager manager = DBManager.getInstance();
+	    try (Connection cn = manager.getConnection()) {
+	        String sql = "INSERT INTO merchandise (image_url, product_name, description_of_item, price, product_type, stock, new_item, featured_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	        PreparedStatement stmt = cn.prepareStatement(sql);
+	        stmt.setString(1, image_url);
+	        stmt.setString(2, productName);
+	        stmt.setString(3, description);
+	        stmt.setInt(4, price);
+	        stmt.setInt(5, PRODUCT_TYPE);
+	        stmt.setInt(6, stock);
+	        stmt.setInt(7, new_item);
+	        stmt.setInt(8, FEATURED_PRODUCTS);
+//		stmt.setInt(9, new Timestamp(System.currentTimeMillis()));
+//		stmt.setInt(10,new Timestamp(System.currentTimeMillis()));
+		ret = stmt.executeUpdate();
+		if(ret != -1) {
+			return true;
+		}
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return false;
+	}
 
-//	public void update(int id, String productName, String productCode, String price, String stock,
-//	        String FEATURED_PRODUCTS, String description, String size, String color, String image_url,
-//	        String PRODUCT_TYPE, String new_item) {
-//	    int pr = Integer.parseInt(price);
-//	    int st = Integer.parseInt(stock);
-//	    int ptype = Integer.parseInt(PRODUCT_TYPE);
-//	    int ni = Integer.parseInt(new_item);
-//	    int fp = Integer.parseInt(FEATURED_PRODUCTS);
-//
-//	    DBManager manager = DBManager.getInstance();
-//	    try (Connection cn = manager.getConnection()) {
-//	        String sql = "UPDATE merchandise SET PRODUCT_NAME=?, PRICE=?, STOCK=?, DESCRIPTION_OF_ITEM=?, image_url=?, "
-//	                + "PRODUCT_TYPE=?, new_item=?, FEATURED_PRODUCTS=? WHERE ID=?";
-//	        PreparedStatement stmt = cn.prepareStatement(sql);
-//
-//	        stmt.setString(1, productName);
-//	        stmt.setInt(2, pr);
-//	        stmt.setInt(3, st);
-//	        stmt.setString(4, description);
-//	        stmt.setString(5, image_url);
-//	        stmt.setInt(6, ptype);
-//	        stmt.setInt(7, ni);
-//	        stmt.setInt(8, fp);
-//	        stmt.setInt(9, id); // WHERE句での条件指定
-//
-//	        stmt.executeUpdate();
-//	        System.out.println("success");
-//
-//	    } catch (SQLException e) {
-//	        e.printStackTrace();
-//	    }
-//	}
+
 	
 	/**
      * 商品情報を更新するメソッド
@@ -324,3 +255,77 @@ public class ItemDAO {
 //}
 
 
+//
+//public void set(String productName, String productCode, String price,String stock,String FEATURED_PRODUCTS,
+//		String description, String size, String color, String image_url,String PRODUCT_TYPE,String new_item) {
+//	System.out.println("do");
+//	//int pc = Integer.parseInt(productCode);
+//	int pr = Integer.parseInt(price);
+//	int st = Integer.parseInt(stock);
+//	int ptype = Integer.parseInt(PRODUCT_TYPE);
+//	int ni = Integer.parseInt(new_item);
+//	int fp = Integer.parseInt(FEATURED_PRODUCTS);
+//	
+//	DBManager manager = DBManager.getInstance();
+//	try(Connection cn = manager.getConnection()) {
+//		String sql = "INSERT INTO merchandise (PRODUCT_NAME,PRICE,STOCK,DESCRIPTION_OF_ITEM,image_url,PRODUCT_TYPE,new_item,FEATURED_PRODUCTS) VALUES(?,?,?,?,?,?,?,?)";
+//		PreparedStatement stmt = cn.prepareStatement(sql);
+//		
+//		stmt.setString(1,productName);
+////		stmt.setInt(2, pc);
+//		stmt.setInt(2, pr);
+//		stmt.setInt(3, st);
+//		stmt.setString(4, description);
+//		//stmt.setString(5, image_url);
+//		stmt.setString(5, image_url);
+//		stmt.setInt(6,ptype);
+//		stmt.setInt(7,ni);
+//		stmt.setInt(8, fp);
+//		System.out.println("succses");
+////		int Size = Integer.parseInt(size);
+////		int Color = Integer.parseInt(color);
+////		int Stock = Integer.parseInt(stock);
+////		setsize(Size);
+////		setcolor(Color);
+//		
+//		stmt.executeUpdate();
+//		
+//		// データをリストに格納
+//	} catch(SQLException e) {
+//		e.printStackTrace();
+//	}
+//
+//}
+
+//public void update(int id, String productName, String productCode, String price, String stock,
+//        String FEATURED_PRODUCTS, String description, String size, String color, String image_url,
+//        String PRODUCT_TYPE, String new_item) {
+//    int pr = Integer.parseInt(price);
+//    int st = Integer.parseInt(stock);
+//    int ptype = Integer.parseInt(PRODUCT_TYPE);
+//    int ni = Integer.parseInt(new_item);
+//    int fp = Integer.parseInt(FEATURED_PRODUCTS);
+//
+//    DBManager manager = DBManager.getInstance();
+//    try (Connection cn = manager.getConnection()) {
+//        String sql = "UPDATE merchandise SET PRODUCT_NAME=?, PRICE=?, STOCK=?, DESCRIPTION_OF_ITEM=?, image_url=?, "
+//                + "PRODUCT_TYPE=?, new_item=?, FEATURED_PRODUCTS=? WHERE ID=?";
+//        PreparedStatement stmt = cn.prepareStatement(sql);
+//
+//        stmt.setString(1, productName);
+//        stmt.setInt(2, pr);
+//        stmt.setInt(3, st);
+//        stmt.setString(4, description);
+//        stmt.setString(5, image_url);
+//        stmt.setInt(6, ptype);
+//        stmt.setInt(7, ni);
+//        stmt.setInt(8, fp);
+//        stmt.setInt(9, id); // WHERE句での条件指定
+//
+//        stmt.executeUpdate();
+//        System.out.println("success");
+//
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    }
+//}
