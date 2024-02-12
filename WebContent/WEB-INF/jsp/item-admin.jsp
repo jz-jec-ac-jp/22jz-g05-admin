@@ -10,11 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/script.js"></script>
 <title>商品画面</title>
 </head>
 
 <body class="product-admin">
-
 	<main>
 		<ul class="sidenav">
 			<li><img class="admin-header" src="../../shinor/img/Header.PNG"
@@ -53,46 +53,6 @@
             <div class="success-message">${successMessage}</div>
         </c:if>
 	</main>
-	
-	<script>
-	 // 商品情報の更新機能
-function updateItem(itemId) {
-    var updatedStock = prompt("更新後の在庫数を入力してください:", "");
-
-    // Ajaxリクエストを送信
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "Itemadmin", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            alert("商品の在庫が更新されました。");
-            location.reload(); // ページをリロードして更新を反映
-        }
-    };
-
-    // 在庫数の更新情報を送信
-    xhr.send("action=update&itemId=" + itemId + "&updatedStock=" + encodeURIComponent(updatedStock));
-}
-
-
-</script>
-<script>
-    function filterOrders() {
-      var input, filter, userItems, i, txtValue;
-      input = document.getElementById("orderSearchInput");
-      filter = input.value.toUpperCase();
-      userItems = document.querySelectorAll('.product-item');
-
-      userItems.forEach(function (item) {
-        txtValue = item.textContent || item.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          item.style.display = "";
-        } else {
-          item.style.display = "none";
-        }
-      });
-    }
-  </script>
 </body>
 
 </html>

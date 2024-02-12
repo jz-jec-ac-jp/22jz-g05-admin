@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/script.js"></script>
   <title>ユーザー管理画面</title>
 </head>
 
@@ -41,21 +42,7 @@
 </c:forEach>
   </div>
 <script>
-    function filterOrders() {
-      var input, filter, userItems, i, txtValue;
-      input = document.getElementById("orderSearchInput");
-      filter = input.value.toUpperCase();
-      userItems = document.querySelectorAll('.user');
-
-      userItems.forEach(function (item) {
-        txtValue = item.textContent || item.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          item.style.display = "";
-        } else {
-          item.style.display = "none";
-        }
-      });
-    }
+   
   </script>
 </body>
 

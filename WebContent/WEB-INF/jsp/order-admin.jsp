@@ -9,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/script.js"></script>
 <title>注文データ一覧画面</title>
 </head>
 
@@ -50,40 +51,7 @@
 			</div>
 		</div>
 	</main>
-	<script>
-		function filterOrders() {
-			var input, filter, orderItems, i, txtValue;
-			input = document.getElementById("orderSearchInput");
-			filter = input.value.toUpperCase();
-			orderItems = document.querySelectorAll('.order-item');
-
-			orderItems.forEach(function(item) {
-				txtValue = item.textContent || item.innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-					item.style.display = "";
-				} else {
-					item.style.display = "none";
-				}
-			});
-		}
-
-		document.addEventListener("DOMContentLoaded", function() {
-			// ページロード時にすべての選択を復元
-			document.querySelectorAll('select[name="delivery"]').forEach(
-					function(selectElement, index) {
-						var savedSelection = localStorage
-								.getItem("selectedDelivery" + index);
-						if (savedSelection) {
-							selectElement.value = savedSelection;
-						}
-						// 選択の変更をローカルストレージに保存
-						selectElement.addEventListener("change", function() {
-							localStorage.setItem("selectedDelivery" + index,
-									this.value);
-						});
-					});
-		});
-	</script>
+	
 </body>
 
 </html>
