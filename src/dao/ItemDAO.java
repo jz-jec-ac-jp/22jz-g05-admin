@@ -182,6 +182,32 @@ public class ItemDAO {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
+
+//	public boolean insertItem(String image_url, String productName, String description, int price, int productType,
+//			int stock, int new_item, int featuredProducts) {
+//		int ret = -1;
+//	       DBManager manager = DBManager.getInstance();
+//	    try (Connection cn = manager.getConnection()) {
+//	        String sql = "INSERT INTO merchandise (image_url, product_name, description_of_item, price, product_type, stock, new_item, featured_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//	        PreparedStatement stmt = cn.prepareStatement(sql);
+//	        stmt.setString(1, image_url);
+//	        stmt.setString(2, productName);
+//	        stmt.setString(3, description);
+//	        stmt.setInt(4, price);
+//	        stmt.setInt(6, stock);
+//	        stmt.setInt(7, new_item);
+////		stmt.setInt(9, new Timestamp(System.currentTimeMillis()));
+////		stmt.setInt(10,new Timestamp(System.currentTimeMillis()));
+//		ret = stmt.executeUpdate();
+//		if(ret != -1) {
+//			return true;
+//		}
+//	    } catch (SQLException e) {
+//	        e.printStackTrace();
+//	    }
+//		return false;
+//		
+//	}
     }
 
 //   

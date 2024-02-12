@@ -29,9 +29,10 @@
 		<div class="product-form">
 			<div class="product-list">
 				<h3>商品一覧</h3>
-				<form action="Itemadmin" method="post">
-        <input type="submit" name="action" value="新規登録">
-        </form>
+				<form action="ItemInfo" method="get">
+    <input type="submit" value="新規登録">
+</form>
+
 				<input type="text" id="orderSearchInput" oninput="filterOrders()"
 					placeholder="商品を検索...">
 <c:forEach var="item" items="${item_list}">

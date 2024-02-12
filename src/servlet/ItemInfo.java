@@ -41,6 +41,9 @@ public class ItemInfo extends HttpServlet {
 		
 		String productName = request.getParameter("productName");
 		String productCode = request.getParameter("productCode");
+		int price = Integer.parseInt(request.getParameter("price"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
 //		String price = request.getParameter("price");
 //		String stock = request.getParameter("stockQuantity");
 //		String FEATURED_PRODUCTS = request.getParameter("FEATURED_PRODUCTS");
@@ -48,20 +51,20 @@ public class ItemInfo extends HttpServlet {
 		String size = request.getParameter("size");
 		String color = request.getParameter("color");
 		String image_url = request.getParameter("image_url");
-		String PRODUCT_TYPE = request.getParameter("PRODUCT_TYPE");
-		String new_item = request.getParameter("new_item");
+		int productType = Integer.parseInt(request.getParameter("productType"));
+//		String PRODUCT_TYPE = request.getParameter("PRODUCT_TYPE");
+		int new_item = Integer.parseInt(request.getParameter("new_item"));
 		
-		int price = Integer.parseInt(request.getParameter("price"));
-        int productType = Integer.parseInt(request.getParameter("productType"));
-        int stock = Integer.parseInt(request.getParameter("stock"));
-        int newItem = Integer.parseInt(request.getParameter("newItem"));
-        int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
+		
+        
+        
+        
 		
 		System.out.println("stock : " + stock);
 		System.out.println("color : " + color);
 		
 		ItemDAO item = new ItemDAO();
-		item.insertItem(productName,productCode,price,stock,featuredProducts,description,size,color);
+		item.insertItem(image_url,productName,description,price,productType,stock,new_item,featuredProducts);
 //		item.set(productName,productCode,price,stock,FEATURED_PRODUCTS,description,size,color,image_url, PRODUCT_TYPE, new_item);
 		
 		response.sendRedirect("Itemadmin");

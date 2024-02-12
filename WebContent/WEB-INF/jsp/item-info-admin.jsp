@@ -34,7 +34,7 @@ function updateProductDetails() {
 <body>
     <div id="newProductForm" class="new-product-form">
 					<h3>新規商品登録</h3>
-					<form id="product-form" enctype="multipart/form-data">
+					<form id="product-form" action="ItemInfo" method="post" enctype="multipart/form-data">
 						<label for="productName">商品名:</label> <input type="text"
 							id="productName" name="productName" required> <label
 							for="productCode">商品コード:</label> <input type="text"
