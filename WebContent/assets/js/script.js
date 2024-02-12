@@ -84,3 +84,9 @@ function filterOrders3() {
         }
     });
 }
+
+
+function updateProductDetails() {
+    // ここで商品情報を保存・更新する処理を追加
+    alert('商品情報が登録されました。');
+}
