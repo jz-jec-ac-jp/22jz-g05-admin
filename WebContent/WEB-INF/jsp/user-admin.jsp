@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/script.js" defer></script>
   <title>ユーザー管理画面</title>
 </head>
 
@@ -23,7 +23,7 @@
   </div>
   <div class="container">
     <h1 class="user-h1">ユーザー管理画面</h1>
-    <input type="text" id="orderSearchInput" oninput="filterOrders()" placeholder="ユーザーを検索...">
+    <input type="text" id="orderSearchInput" oninput="filterOrders3()" placeholder="ユーザーを検索...">
 <c:forEach var="UserAdmin" items="${user}">
       <div class="user">
         <div class="user-info">

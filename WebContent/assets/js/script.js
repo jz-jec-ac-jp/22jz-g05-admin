@@ -19,7 +19,7 @@ function updateItem(itemId) {
 
 
 
-function filterOrders() {
+function filterOrders1() {
     var input, filter, userItems, i, txtValue;
     input = document.getElementById("orderSearchInput");
     filter = input.value.toUpperCase();
@@ -36,7 +36,7 @@ function filterOrders() {
 }
 
 
-function filterOrders() {
+function filterOrders2() {
     var input, filter, orderItems, i, txtValue;
     input = document.getElementById("orderSearchInput");
     filter = input.value.toUpperCase();
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
-function filterOrders() {
+function filterOrders3() {
     var input, filter, userItems, i, txtValue;
     input = document.getElementById("orderSearchInput");
     filter = input.value.toUpperCase();

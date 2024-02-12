@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="assets/css/style.css">
-<script src="assets/js/script.js"></script>
+<script src="assets/js/script.js" defer></script>
 <title>注文データ一覧画面</title>
 </head>
 
@@ -28,7 +28,7 @@
 			<div class="order-form">
 				<div class="order-list">
 					<h3>注文データ一覧</h3>
-					<input type="text" id="orderSearchInput" oninput="filterOrders()"
+					<input type="text" id="orderSearchInput" oninput="filterOrders2()"
 						placeholder="注文を検索...">
 					<c:forEach var="ph" items="${ph}">
 						<div class="order-item">

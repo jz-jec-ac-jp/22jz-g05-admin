@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="assets/css/style.css">
-<script src="assets/js/script.js"></script>
+<script src="assets/js/script.js" defer></script>
 <title>商品画面</title>
 </head>
 
@@ -33,8 +33,7 @@
     <input type="submit" value="新規登録">
 </form>
 
-				<input type="text" id="orderSearchInput" oninput="filterOrders()"
-					placeholder="商品を検索...">
+				<input type="text" id="orderSearchInput" oninput="filterOrders1()" placeholder="商品を検索...">
 <c:forEach var="item" items="${item_list}">
     <div class="product-item">
         <span>${item.id}</span>
