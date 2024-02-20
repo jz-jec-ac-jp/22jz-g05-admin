@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDAO;
+import model.Item;
 
 /**
  * Servlet implementation class ItemInfo
@@ -35,39 +37,32 @@ public class ItemInfo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text.html; charset=UTF-8");
-		
-		String productName = request.getParameter("productName");
-		String productCode = request.getParameter("productCode");
-		int price = Integer.parseInt(request.getParameter("price"));
-		int stock = Integer.parseInt(request.getParameter("stock"));
-		int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
-//		String price = request.getParameter("price");
-//		String stock = request.getParameter("stockQuantity");
-//		String FEATURED_PRODUCTS = request.getParameter("FEATURED_PRODUCTS");
-		String description = request.getParameter("description");
-		String size = request.getParameter("size");
-		String color = request.getParameter("color");
-		String image_url = request.getParameter("image_url");
-		int productType = Integer.parseInt(request.getParameter("productType"));
-//		String PRODUCT_TYPE = request.getParameter("PRODUCT_TYPE");
-		int new_item = Integer.parseInt(request.getParameter("new_item"));
-		
-		
-        
-        
-        
-		
-		System.out.println("stock : " + stock);
-		System.out.println("color : " + color);
-		
-		ItemDAO item = new ItemDAO();
-		item.insertItem(image_url,productName,description,price,productType,stock,new_item,featuredProducts);
-//		item.set(productName,productCode,price,stock,FEATURED_PRODUCTS,description,size,color,image_url, PRODUCT_TYPE, new_item);
-		
-		response.sendRedirect("Itemadmin");
+	    request.setCharacterEncoding("UTF-8");
+	    
+	    // フォームからの情報を取得
+	    String productName = request.getParameter("productName");
+	    int price = Integer.parseInt(request.getParameter("price"));
+	    int stock = Integer.parseInt(request.getParameter("stock"));
+	    String description = request.getParameter("description");
+	    String imageUrl = request.getParameter("image_url");
+	    int productType = Integer.parseInt(request.getParameter("productType"));
+	    int newItem = Integer.parseInt(request.getParameter("new_item"));
+	    int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
+	    
+	    // Itemオブジェクトの作成
+	    Item item = new Item(0, productName, price, stock, description, imageUrl, productType, newItem, featuredProducts, LocalDateTime.now(), LocalDateTime.now());
+	    
+	    // DAOを使用してデータベースに商品を登録
+	    ItemDAO dao = new ItemDAO();
+	    boolean result = dao.insertItem1(item);
+	    
+	    if (result) {
+	        // 登録成功時の処理
+	        response.sendRedirect("itemList");
+	    } else {
+	        // 登録失敗時の処理
+	        request.setAttribute("errorMessage", "商品の登録に失敗しました。");
+	        request.getRequestDispatcher("/errorPage").forward(request, response);
+	    }
 	}
-
 }
