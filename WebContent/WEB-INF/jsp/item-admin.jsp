@@ -33,15 +33,20 @@
 
               <input type="text" id="orderSearchInput" oninput="filterOrders1()" placeholder="商品を検索...">
               <c:forEach var="item" items="${item_list}">
-                <div class="product-item">
-                  <span>${item.id}</span>
-                  <span>${item.productName}</span>
-                  <span>${item.price}</span>
-                  <form action="ItemUpdate" method="post">
-                    <input type="submit" name="update" value="編集">
-                  </form>
-                </div>
-              </c:forEach>
+  <div class="product-item">
+    <span>${item.id}</span>
+    <span>${item.productName}</span>
+    <span>${item.price}</span>
+    <form action="ItemUpdate" method="post">
+      <!-- 更新アクションを識別するための隠しフィールド -->
+      <input type="hidden" name="action" value="update">
+      <!-- 商品IDを送信するための隠しフィールド -->
+      <input type="hidden" name="id" value="${item.id}">
+      <input type="submit" name="update" value="編集">
+    </form>
+  </div>
+</c:forEach>
+
             </div>
 
 

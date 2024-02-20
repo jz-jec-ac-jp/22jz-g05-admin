@@ -171,36 +171,32 @@ public class ItemDAO {
      * @param newItemPrice 新しい商品価格
      * @return 更新が成功した場合は true、失敗した場合は false
      */
-    public void updateItem(String id, String productName, String productCode, String price, String stock,String FEATURED_PRODUCTS, String description, String size, String color, String image_url,String PRODUCT_TYPE, String new_item) {
-    	int Id = Integer.parseInt(id);
-    	int pr = Integer.parseInt(price);
-	    int st = Integer.parseInt(stock);
-	    int ptype = Integer.parseInt(PRODUCT_TYPE);
-	    int ni = Integer.parseInt(new_item);
-	    int fp = Integer.parseInt(FEATURED_PRODUCTS);
-    	
-    	DBManager manager = DBManager.getInstance();
-        try (Connection cn = manager.getConnection()) {
-            String sql = "UPDATE merchandise SET PRODUCT_NAME=?, PRICE=?, STOCK=?, FEATURED_PRODUCTS=?, DESCRIPTION_OF_ITEM=?, SIZE=?, COLOR=?, IMAGE_URL=?, PRODUCT_TYPE=?, NEW_ITEM=? WHERE ID=?;";
-            try (PreparedStatement stmt = cn.prepareStatement(sql)) {
-            	
-                stmt.setString(1, productName);
-                stmt.setInt(2, pr);
-                stmt.setInt(3, st);
-                stmt.setInt(4, fp);
-                stmt.setString(5, description);
-                stmt.setString(6, size);
-                stmt.setString(7, color);
-                stmt.setString(8, image_url);
-                stmt.setInt(9, ptype);
-                stmt.setInt(10, ni);
-                stmt.setInt(11, Id);
-                stmt.executeUpdate();
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-            }
-        }
+	public boolean updateItem(Item item) {
+	    // SQLクエリーの定義。商品IDを使用して特定の商品を更新します。
+	    String sql = "UPDATE merchandise SET PRODUCT_NAME=?, PRICE=?, STOCK=?, DESCRIPTION_OF_ITEM=?, image_url=?, PRODUCT_TYPE=?, new_item=?, FEATURED_PRODUCTS=? WHERE ID=?";
+	    DBManager manager = DBManager.getInstance();
+	    try (Connection cn = manager.getConnection(); PreparedStatement stmt = cn.prepareStatement(sql)) {
+	        // PreparedStatementのパラメーターを設定
+	        stmt.setString(1, item.getProductName());
+	        stmt.setInt(2, item.getPrice());
+	        stmt.setInt(3, item.getStock());
+	        stmt.setString(4, item.getDescription());
+	        stmt.setString(5, item.getImageUrl());
+	        stmt.setInt(6, item.getProductType());
+	        stmt.setInt(7, item.getNewItem());
+	        stmt.setInt(8, item.getFeaturedProducts());
+	        stmt.setInt(9, item.getId()); // 更新する商品のID
+
+	        // SQLクエリーの実行
+	        int affectedRows = stmt.executeUpdate();
+	        // 更新が成功した行が1行以上あるかどうかをチェック
+	        return affectedRows > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
 
 //	public boolean insertItem(String image_url, String productName, String description, int price, int productType,
 //			int stock, int new_item, int featuredProducts) {

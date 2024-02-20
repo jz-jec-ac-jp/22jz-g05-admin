@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -32,6 +33,36 @@ public class Itemadmin extends HttpServlet {
         
         if ("insert".equals(action)) {
             insertItem(request, response);
+        } else if ("update".equals(action)) {
+            // 更新処理を行うメソッドの呼び出し
+            ItemUpdate(request, response);
+        }
+    }
+    
+    private void ItemUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	// フォームからの情報を取得
+	    String productName = request.getParameter("productName");
+	    int price = Integer.parseInt(request.getParameter("price"));
+	    int stock = Integer.parseInt(request.getParameter("stock"));
+	    String description = request.getParameter("description");
+	    String imageUrl = request.getParameter("productImage");
+	    int productType = Integer.parseInt(request.getParameter("productType"));
+	    int newItem = Integer.parseInt(request.getParameter("new_item"));
+	    int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
+	    
+        // Itemオブジェクトの作成
+        Item item = new Item(0,productName, price, stock, description, imageUrl, productType, newItem, featuredProducts, LocalDateTime.now(), LocalDateTime.now());
+
+        // DAOを使用して商品情報を更新
+        ItemDAO dao = new ItemDAO();
+        boolean result = dao.updateItem(item);
+
+        if (result) {
+            // 更新成功時の処理（例: 商品一覧ページへリダイレクト）
+            response.sendRedirect("Itemadmin");
+        } else {
+            // 更新失敗時の処理（例: エラーページへリダイレクト）
+            response.sendRedirect("error.jsp");
         }
     }
 

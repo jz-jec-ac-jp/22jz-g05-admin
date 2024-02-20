@@ -45,7 +45,7 @@
 						</select>
 						<label for="productImage">商品画像:</label>
 						<input type="file" id="productImage" name="productImage" accept="image/*" onchange="previewImage(this)">
-						<button type="submit">登録</button>
+						<button type="submit">更新</button>
 					</form>
 				</div>
 				</div>

@@ -1,7 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime; // 必要に応じてインポート
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,43 +11,52 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDAO;
+import model.Item;
 
-/**
- * Servlet implementation class ItemUpdate
- */
 @WebServlet("/ItemUpdate")
 public class ItemUpdate extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("UTF-8");
+		response.setContentType("text.html; charset=UTF-8");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/update.jsp");
+        dispatcher.forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String id = request.getParameter("id");
-        String productName = request.getParameter("productName");
-		String productCode = request.getParameter("productCode");
-		String price = request.getParameter("price");
-		String stock = request.getParameter("stockQuantity");
-		String FEATURED_PRODUCTS = request.getParameter("FEATURED_PRODUCTS");
-		String description = request.getParameter("description");
-		String size = request.getParameter("size");
-		String color = request.getParameter("color");
-		String image_url = request.getParameter("image_url");
-		String PRODUCT_TYPE = request.getParameter("PRODUCT_TYPE");
-		String new_item = request.getParameter("new_item");
-		//
-		ItemDAO dao = new ItemDAO();
-		dao.updateItem(id ,productName, productCode, price, stock, FEATURED_PRODUCTS, description, size, color, image_url, PRODUCT_TYPE, new_item);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    request.setCharacterEncoding("UTF-8");
+	    
+	    System.out.println(request.getParameter("productName"));
+	    System.out.println(request.getParameter("price"));
+	    System.out.println(request.getParameter("stock"));
+	    System.out.println(request.getParameter("description"));
+	    System.out.println(request.getParameter("productType"));
+	    System.out.println(request.getParameter("productImage"));
+	    System.out.println(request.getParameter("featuredProducts"));
+	    // フォームからの情報を取得
+	    String productName = request.getParameter("productName");
+	    int price = Integer.parseInt(request.getParameter("price"));
+	    int stock = Integer.parseInt(request.getParameter("stock"));
+	    String description = request.getParameter("description");
+	    String imageUrl = request.getParameter("productImage");
+	    int productType = Integer.parseInt(request.getParameter("productType"));
+	    int newItem = Integer.parseInt(request.getParameter("new_item"));
+	    int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
+	    
+        // Itemオブジェクトの作成
+        Item item = new Item(0,productName, price, stock, description, imageUrl, productType, newItem, featuredProducts, LocalDateTime.now(), LocalDateTime.now());
 
-	}
+        // DAOを使用して商品情報を更新
+        ItemDAO dao = new ItemDAO();
+        boolean result = dao.updateItem(item);
 
+        if (result) {
+            // 更新成功時の処理（例: 商品一覧ページへリダイレクト）
+            response.sendRedirect("itemList.jsp");
+        } else {
+            // 更新失敗時の処理（例: エラーページへリダイレクト）
+            response.sendRedirect("error.jsp");
+        }
+    }
 }
