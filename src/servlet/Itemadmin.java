@@ -30,7 +30,6 @@ public class Itemadmin extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         
-
         if ("insert".equals(action)) {
             insertItem(request, response);
         }
@@ -45,16 +44,18 @@ public class Itemadmin extends HttpServlet {
         int stock = Integer.parseInt(request.getParameter("stock"));
         int newItem = Integer.parseInt(request.getParameter("newItem"));
         int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
-//        LocalDateTime addedDate = LocalDateTime.now();
-//        LocalDateTime updateDate = LocalDateTime.now();
+
+        // Itemオブジェクトの作成
+        Item item = new Item(0, productName, price, stock, description, imageUrl, productType, newItem, featuredProducts, null, null); // addedDateとupdateDateはDBで自動生成されることを想定
 
         ItemDAO dao = new ItemDAO();
-        boolean result = dao.insertItem(productName, price, stock, featuredProducts, description, imageUrl, productType, newItem);
+        // 正しいメソッド名を使用
+        boolean result = dao.insertItem1(item);
 
         if (result) {
-            response.sendRedirect("item-list.jsp"); // or another success page
+            response.sendRedirect("Itemadmin"); // 成功した場合のリダイレクト先を指定
         } else {
-            response.sendRedirect("error.jsp"); // or another error handling page
+            response.sendRedirect("error.jsp"); // エラー時のページ
         }
     }
 }

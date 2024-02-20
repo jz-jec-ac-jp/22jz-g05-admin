@@ -39,15 +39,23 @@ public class ItemInfo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
 	    
+	    System.out.println(request.getParameter("productName"));
+	    System.out.println(request.getParameter("price"));
+	    System.out.println(request.getParameter("stock"));
+	    System.out.println(request.getParameter("description"));
+	    System.out.println(request.getParameter("productType"));
+	    System.out.println(request.getParameter("productImage"));
+	    System.out.println(request.getParameter("featuredProducts"));
 	    // フォームからの情報を取得
 	    String productName = request.getParameter("productName");
 	    int price = Integer.parseInt(request.getParameter("price"));
 	    int stock = Integer.parseInt(request.getParameter("stock"));
 	    String description = request.getParameter("description");
-	    String imageUrl = request.getParameter("image_url");
+	    String imageUrl = request.getParameter("productImage");
 	    int productType = Integer.parseInt(request.getParameter("productType"));
 	    int newItem = Integer.parseInt(request.getParameter("new_item"));
 	    int featuredProducts = Integer.parseInt(request.getParameter("featuredProducts"));
+	    
 	    
 	    // Itemオブジェクトの作成
 	    Item item = new Item(0, productName, price, stock, description, imageUrl, productType, newItem, featuredProducts, LocalDateTime.now(), LocalDateTime.now());
@@ -58,7 +66,7 @@ public class ItemInfo extends HttpServlet {
 	    
 	    if (result) {
 	        // 登録成功時の処理
-	        response.sendRedirect("itemList");
+	        response.sendRedirect("Itemadmin");
 	    } else {
 	        // 登録失敗時の処理
 	        request.setAttribute("errorMessage", "商品の登録に失敗しました。");
